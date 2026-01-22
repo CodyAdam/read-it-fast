@@ -35,7 +35,7 @@ type StorageItem<T> = ReturnType<typeof storage.defineItem<T>>;
  */
 export function useSettings<T>(
   item: StorageItem<T>,
-  fallback?: T
+  fallback?: T,
 ): {
   value: T;
   loading: boolean;
@@ -103,7 +103,7 @@ export function useSettings<T>(
         throw error;
       }
     },
-    [item]
+    [item],
   );
 
   // Return fallback value while loading or if value is null
@@ -126,7 +126,7 @@ export const settings = {
    * Words per minute reading speed setting
    */
   wordsPerMinute: storage.defineItem<number>("local:wordsPerMinute", {
-    fallback: 200,
+    fallback: 300,
   }),
   /**
    * Start delay in seconds before RSVP begins
@@ -138,7 +138,7 @@ export const settings = {
    * Hotkey to trigger/hold RSVP display (default: "Meta")
    */
   triggerHotkey: storage.defineItem<string>("local:triggerHotkey", {
-    fallback: "Meta",
+    fallback: "Alt",
   }),
   /**
    * Hotkey to balance outward while trigger is held (default: "Shift")
@@ -147,7 +147,7 @@ export const settings = {
     "local:balanceOutwardHotkey",
     {
       fallback: "Shift",
-    }
+    },
   ),
   /**
    * Scale for RSVP display (default: 1.0)
@@ -159,7 +159,7 @@ export const settings = {
    * Card background color (default: rgba(0, 0, 0, 0.95))
    */
   cardBackgroundColor: storage.defineItem<string>("local:cardBackgroundColor", {
-    fallback: "#000000f0",
+    fallback: "#000000F0",
   }),
   /**
    * Card text color (default: white)

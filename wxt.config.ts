@@ -6,7 +6,7 @@ export default defineConfig({
   webExt: {
     startUrls: [
       "https://wxt.dev/guide/essentials/config/browser-startup.html",
-      "https://github.com/aws/aws-sdk-js-v3/pull/7280",
+      "https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal",
     ],
   },
   manifest: {

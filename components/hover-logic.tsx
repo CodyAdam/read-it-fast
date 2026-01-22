@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import HoverCard from "./hover-card";
 import { useSettings, settings } from "@/hooks/useSettings";
 
-const OUTLINE_PADDING = 6; // Padding around the outline in pixels
+const OUTLINE_PADDING = 2; // Padding around the outline in pixels
 
 // Function to get only visible text content from element
 function getTextFromElement(element: Element | null, newLineChar: string): string {
@@ -28,16 +28,19 @@ function getTextFromElement(element: Element | null, newLineChar: string): strin
         return "";
       }
 
+      const display = window.getComputedStyle(el).display;
+      const isInline = display === "inline" || display === "inline-block" || display === "inline-flex" || display === "inline-grid";
+
       let text = "";
       for (const child of Array.from(el.childNodes)) {
-        text += getVisibleText(child) + newLineChar + " ";
+        text += getVisibleText(child)
       }
-      return text;
+      return `${text}${isInline ? " " : (newLineChar + " ")}`;
     }
 
     if (node.nodeType === Node.TEXT_NODE) {
       const text = node.textContent?.trim() || "";
-      return text.length > 0 ? text : "";
+      return text.length > 0 ? `${text} ` : "";
     }
 
     return "";
@@ -64,17 +67,17 @@ export default function HoverLogic() {
   const { value: balanceOutwardHotkey } = useSettings(settings.balanceOutwardHotkey);
   const { value: newLineChar } = useSettings(settings.newLineChar);
 
-  const balanceOutward = useCallback((delta: number) => {
+  const balanceOutward = useCallback(() => {
     let current = targetElementRef.current;
     if (!current) return;
 
     const currentText = getTextFromElement(current, newLineChar);
 
     let newText = currentText;
-    while (currentText === newText) {
+    while (currentText.length >= newText.length) {
       if (current.parentElement) {
         current = current.parentElement;
-        newText = getTextFromElement(current, newLineChar);
+        newText = cleanText(getTextFromElement(current, newLineChar), newLineChar);
       } else {
         break;
       }
@@ -130,25 +133,37 @@ export default function HoverLogic() {
   }, []);
 
   useEffect(() => {
+    // When the window/tab loses focus, disable (setShow to false)
+    function handleBlurOrHide() {
+      setShow(false);
+    }
+
+    window.addEventListener("blur", handleBlurOrHide);
+    document.addEventListener("visibilitychange", handleBlurOrHide);
+
+    return () => {
+      window.removeEventListener("blur", handleBlurOrHide);
+      document.removeEventListener("visibilitychange", handleBlurOrHide);
+    };
+  }, []);
+
+  useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const triggerHeld = isModifierHeld(e, triggerHotkey);
       const balanceKeyMatch = isKeyMatch(e, balanceOutwardHotkey);
 
       // If trigger is held and balance key is pressed, balance outward
       if (triggerHeld && balanceKeyMatch) {
-        console.log("balanceOutward", 1);
-        balanceOutward(1);
+        balanceOutward();
       }
       // If trigger key itself is pressed, show RSVP
       else if (isKeyMatch(e, triggerHotkey)) {
-        console.log("show");
         setShow(true);
       }
     }
 
     function handleKeyUp(e: KeyboardEvent) {
       if (isKeyMatch(e, triggerHotkey)) {
-        console.log("hide");
         targetElementRef.current = rootElementRef.current;
 
         if (rootElementRef.current) {

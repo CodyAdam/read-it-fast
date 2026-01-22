@@ -10,12 +10,17 @@
  */
 export function parseText(text: string, newLineChar: string = "›"): string[] {
   if (!text || typeof text !== "string") return [];
-  console.log(text);
   return text
-    .replace(new RegExp(`(${newLineChar} ?)+`, "g"), newLineChar + " ")
-    .trim()
     .split(/\s+/)
     .filter((w) => w.replaceAll(newLineChar, "").trim().length > 0);
+}
+
+export function cleanText(text: string, newLineChar: string = "›"): string {
+  let pattern = `( *${newLineChar}+ *)+`;
+  let regex = new RegExp(`^${pattern}|${pattern}$`, "g");
+  let cleaned = text.replace(regex, "");
+  cleaned = cleaned.replace(new RegExp(pattern, "g"), newLineChar + " ");
+  return cleaned.trim();
 }
 
 /**

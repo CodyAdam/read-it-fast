@@ -7,6 +7,8 @@ const LEFT_OFFSET = 100;
 const MOUSE_OFFSET = 23;
 const TOTAL_WIDTH = 400;
 const PADDING = 20;
+const HEIGHT = 70;
+const TOP_OFFSET = 20;
 
 const textBase = css({
   height: "100%",
@@ -129,7 +131,8 @@ export default function HoverCard({ x, y, text }: { x: number, y: number, text: 
       id="read-it-fast-popup"
       style={{
         left: `${boundedX - (LEFT_OFFSET + MOUSE_OFFSET) * scale}px`,
-        top: `${y - 90}px`,
+        top: `${y - TOP_OFFSET - HEIGHT * scale}px`,
+        height: `${HEIGHT}px`,
         transform: `scale(${scale})`,
         transformOrigin: "top left",
         background: cardBackgroundColor,
@@ -146,7 +149,6 @@ export default function HoverCard({ x, y, text }: { x: number, y: number, text: 
         width: `${TOTAL_WIDTH}px`,
         display: "flex",
         alignItems: "center",
-        height: "70px",
         flexDirection: "row",
         fontFamily: "'Geist Mono Variable', monospace",
         fontWeight: "600",
@@ -164,7 +166,6 @@ function CurrentWordDisplay({ words, currentWordIndex, accentColor }: { words: s
   if (words.length === 0 || currentWordIndex >= words.length) {
     return null;
   }
-  console.log(words);
   const currentWord = words[currentWordIndex];
   const { before, orp, after } = splitWordForDisplay(currentWord);
 
