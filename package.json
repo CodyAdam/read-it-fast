@@ -1,9 +1,19 @@
 {
   "name": "read-it-fast",
-  "description": "manifest.json description",
+  "description": "Rapid reading browser extension using RSVP. Hover over any text while holding a modifier key to read word-by-word at customizable speeds with optimal recognition point highlighting.",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codyadam/read-it-fast.git"
+  },
+  "author": "Cody Adam <cody@codyadam.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/codyadam/read-it-fast",
+  "bugs": {
+    "url": "https://github.com/codyadam/read-it-fast/issues"
+  },
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
@@ -12,13 +22,15 @@
     "zip": "wxt zip",
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare && panda codegen"
   },
   "dependencies": {
+    "@fontsource-variable/geist-mono": "^5.2.7",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
   "devDependencies": {
+    "@pandacss/dev": "^1.8.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@wxt-dev/module-react": "^1.1.5",
