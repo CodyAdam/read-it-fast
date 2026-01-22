@@ -1,101 +1,57 @@
 # Read It Fast
 
-A browser extension that enables rapid reading using **RSVP (Rapid Serial Visual Presentation)**. Simply hover over any text while holding a modifier key to read it at customizable speeds with optimal recognition point (ORP) highlighting.
+Read It Fast is a browser extension that enables rapid reading using **RSVP (Rapid Serial Visual Presentation)**. By holding a modifier key (Alt by default) and hovering over any text, words are displayed one at a time at a fixed location—eliminating eye movement and enabling you to read 2-3x faster. Customize the speed and experience optimal recognition point (ORP) highlighting for maximum reading efficiency.
+
+## What is RSVP Reading?
+
+RSVP reading stands for Rapid Serial Visual Presentation, a technique that displays text one word (or small groups of words) at a time in the same fixed location on a screen. This method eliminates the need for your eyes to move across lines of text, allowing you to focus on a single point while words flash by in rapid succession. By minimizing eye movement, RSVP can help you read faster than traditional methods—typically increasing speed from an average of 250-300 words per minute to 500 or more words per minute with practice. [elvers](https://elvers.us/perception/rsvp/)
+
+The technique works by leveraging the brain's ability to process visual information quickly when the eyes remain stationary. RSVP tools and apps allow you to adjust the reading speed (measured in words per minute) to find a comfortable pace, and you can gradually increase the speed as you become more accustomed to the method. [7speedreading](https://www.7speedreading.com/what-is-rsvp/)
+
+While traditional RSVP implementations work best with shorter texts—as longer materials may require the ability to pause, review previous sections, or create a mental "map" of the content—this extension solves that limitation. By holding down the trigger key and selecting which portion of text to read, you can pause anytime, take time to understand paragraphs, and navigate through longer materials at your own pace. Simply release the trigger to stop, then hover over a different section when you're ready to continue.
 
 ## 🚀 Features
 
-### Core Functionality
-
-- **RSVP Reading**: Read text word-by-word at configurable speeds (WPM)
-- **Hover Activation**: Hold a modifier key (CMD/Meta or Alt) and hover over any text to start reading
-- **Smart Text Selection**: Automatically extracts visible text from any webpage element
-- **Expandable Selection**: Expand text selection to include parent elements while reading
-- **Visual Feedback**: Blue outline highlights the text being read
-- **ORP Highlighting**: Highlights the Optimal Recognition Point (the letter your eye naturally focuses on) in each word
-
-### Customization
-
-- **Adjustable Reading Speed**: Set your preferred words per minute (WPM)
-- **Customizable Display**: Adjust scale, colors (background, text, accent), and timing
-- **Configurable Hotkeys**: Customize trigger and expand keys
-- **Punctuation Handling**: Automatic pauses at sentence endings and commas
-- **Start Delay**: Configurable delay before RSVP begins
-- **New Line Support**: Custom character for representing line breaks
+- **RSVP Reading**: Word-by-word display at configurable speeds (WPM)
+- **Hover Activation**: Hold modifier key and hover to start reading
+- **Smart Text Selection**: Automatically extracts visible text from any webpage
+- **Expandable Selection**: Expand to parent elements while reading
+- **ORP Highlighting**: Highlights the optimal recognition point in each word
+- **Customizable**: Adjust speed, colors, scale, hotkeys, and timing
 
 ## 📦 Installation
 
+### From the store (recommended)
+
+- **Chrome/Edge**: [Install from Chrome Web Store](https://chromewebstore.google.com/detail/read-it-fast/kkmjgffnjckcddlmhfbffbnkjgnmhlag)
+- **Firefox**: [Install from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/read-it-fast/)
+
 ### From Source
 
-1. **Clone the repository**:
+1. **Clone and install**:
 
    ```bash
    git clone https://github.com/codyadam/read-it-fast.git
    cd read-it-fast
-   ```
-
-2. **Install dependencies**:
-
-   ```bash
    bun install
    ```
 
-   (or `npm install` if using npm)
-
-3. **Build the extension**:
+2. **Build**:
 
    ```bash
    bun run build
    ```
 
-   (or `npm run build`)
+3. **Load in browser**:
+   - **Chrome/Edge**: Open `chrome://extensions/`, enable "Developer mode", click "Load unpacked", select `.output/chrome-mv3`
+   - **Firefox**: Open `about:debugging`, click "This Firefox", click "Load Temporary Add-on", select manifest.json from `.output/firefox-mv2`
 
-4. **Load in your browser**:
-   - **Chrome/Edge**:
-     - Open `chrome://extensions/`
-     - Enable "Developer mode"
-     - Click "Load unpacked"
-     - Select the `.output/chrome-mv3` directory
-   - **Firefox**:
-     - Open `about:debugging`
-     - Click "This Firefox"
-     - Click "Load Temporary Add-on"
-     - Select the manifest.json from `.output/firefox-mv2` directory
-
-### Development Mode
-
-For development with hot-reloading:
+### Development
 
 ```bash
-# Chrome/Edge
-bun run dev
-
-# Firefox
-bun run dev:firefox
+bun run dev          # Chrome/Edge
+bun run dev:firefox  # Firefox
 ```
-
-## 🎯 Usage
-
-### Basic Usage
-
-1. **Open the extension popup** (click the extension icon) to configure your settings
-2. **Navigate to any webpage**
-3. **Hold the trigger key** (default: `CMD` on Mac, `Alt` on Windows/Linux)
-4. **Hover your mouse** over any text element
-5. **Watch the words appear** one at a time at your configured reading speed
-
-### Keyboard Shortcuts
-
-- **Trigger Key** (default: `Meta`/`CMD`): Hold to activate RSVP reading
-- **Expand Key** (default: `Shift`): While holding trigger, press to expand selection to parent element
-- **Release Trigger**: Stops reading and hides the RSVP display
-
-### Expanding Text Selection
-
-While holding the trigger key and reading text:
-
-- Press the **Expand Key** (`Shift` by default) to include more surrounding text
-- The selection expands to the parent element, capturing more context
-- A blue outline shows the current text selection
 
 ## ⚙️ Settings
 
@@ -105,8 +61,8 @@ Access settings by clicking the extension icon. All settings are saved automatic
 
 | Setting              | Description                              | Default | Range  |
 | -------------------- | ---------------------------------------- | ------- | ------ |
-| **Words Per Minute** | Reading speed in words per minute        | 200     | 1-9999 |
-| **Start Delay (s)**  | Delay in seconds before RSVP begins      | 0.5     | 0-10   |
+| **Words Per Minute** | Reading speed                            | 200     | 1-9999 |
+| **Start Delay (s)**  | Delay before RSVP begins                 | 0.5     | 0-10   |
 | **End Pause (mult)** | Multiplier for pause at sentence endings | 3.0     | 1-20   |
 
 ### Display Settings
@@ -125,43 +81,46 @@ Access settings by clicking the extension icon. All settings are saved automatic
 | **Trigger Key** | Key to hold for RSVP activation                        | `Meta`  |
 | **Expand Key**  | Key to press while holding trigger to expand selection | `Shift` |
 
+**Supported keys**: `Meta`, `Alt`, `Control`/`Ctrl`, `Shift`
+
 ### Advanced Settings
 
 | Setting           | Description                             | Default |
 | ----------------- | --------------------------------------- | ------- |
 | **New Line Char** | Character used to represent line breaks | `›`     |
 
-### Supported Hotkey Values
+## 🎯 Usage
 
-- `Meta` - Command key (Mac) / Windows key (Windows)
-- `Alt` - Alt/Option key
-- `Control` or `Ctrl` - Control key
-- `Shift` - Shift key
+1. **Hold the trigger key** (default: `Alt`)
+2. **Hover over any text element**
+3. **Press Expand Key** (`Shift` by default) while holding trigger to expand selection to parent element
+4. **Release trigger** to stop reading
 
-## 🔬 How RSVP Works
+## 🔬 How It Works
 
-**RSVP (Rapid Serial Visual Presentation)** is a reading technique that displays words one at a time at a fixed location, eliminating the need for eye movement. This extension implements RSVP with:
+### Optimal Recognition Point (ORP)
 
-- **Optimal Recognition Point (ORP)**: Each word highlights the letter where your eye naturally focuses, based on word length:
+Each word highlights the letter where your eye naturally focuses for fastest recognition:
 
-  - 1-3 letters: First letter
-  - 4-5 letters: Second letter
-  - 6-9 letters: Third letter
-  - 10-12 letters: Fourth letter
-  - 13+ letters: Logarithmic calculation
+- **1-3 letters**: First letter
+- **4-5 letters**: Second letter
+- **6-9 letters**: Third letter
+- **10-12 letters**: Fourth letter
+- **13+ letters**: Logarithmic calculation for optimal positioning
 
-- **Smart Timing**:
+### Smart Timing
 
-  - Base delay calculated from WPM: `60000ms / WPM`
-  - Longer pauses at sentence endings (`.`, `!`, `?`, `;`, `:`)
-  - Medium pauses at commas
-  - Automatic handling of line breaks
+- **Base speed**: Calculated from WPM setting
+- **Sentence endings**: Longer pauses at `.`, `!`, `?`, `;`, `:`
+- **Commas**: Medium pauses for natural rhythm
 
-- **Text Extraction**: Intelligently extracts visible text while ignoring:
-  - Hidden elements
-  - Script and style tags
-  - Elements with `aria-hidden="true"`
-  - Elements with `display: none` or `visibility: hidden`
+### Text Extraction
+
+Automatically extracts readable text while ignoring:
+
+- Hidden elements (not visible on screen)
+- Script and style tags
+- Elements with `aria-hidden="true"` or `display: none`
 
 ## 🛠️ Development
 
@@ -173,40 +132,24 @@ read-it-fast/
 │   ├── hover-card.tsx      # RSVP display component
 │   └── hover-logic.tsx     # Main hover and keyboard logic
 ├── entrypoints/
-│   ├── background.ts       # Background script
-│   ├── content.tsx         # Content script (injected into pages)
-│   └── popup/
-│       ├── App.tsx         # Settings popup UI
-│       ├── main.tsx        # Popup entry point
-│       └── index.html      # Popup HTML
+│   ├── content.tsx         # Content script
+│   └── popup/              # Settings popup UI
 ├── hooks/
-│   └── useSettings.ts      # Settings management hook
+│   └── useSettings.ts      # Settings management
 ├── utils/
 │   └── rsvp.ts             # RSVP calculation utilities
-├── panda.config.ts         # Panda CSS configuration
 └── wxt.config.ts           # WXT extension configuration
 ```
 
-### Available Scripts
+### Scripts
 
 ```bash
-# Development (Chrome/Edge)
-bun run dev
-
-# Development (Firefox)
-bun run dev:firefox
-
-# Build for production
-bun run build
-
-# Build for Firefox
-bun run build:firefox
-
-# Create zip for distribution
-bun run zip
-
-# Type checking
-bun run compile
+bun run dev              # Development (Chrome/Edge)
+bun run dev:firefox      # Development (Firefox)
+bun run build            # Build for production
+bun run build:firefox    # Build for Firefox
+bun run zip              # Create zip for distribution
+bun run compile          # Type checking
 ```
 
 ### Tech Stack
@@ -215,56 +158,11 @@ bun run compile
 - **[React](https://react.dev/)** - UI library
 - **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 - **[Panda CSS](https://panda-css.com/)** - CSS-in-JS styling
-- **[Geist Mono Variable](https://vercel.com/font)** - Monospace font
 
-### Building for Distribution
+## 🙏 Credits
 
-1. **Build the extension**:
-
-   ```bash
-   bun run build
-   ```
-
-2. **Create a zip file**:
-
-   ```bash
-   bun run zip
-   ```
-
-3. The zip file will be created in the project root, ready for submission to browser extension stores.
-
-## 🎨 Customization Examples
-
-### Faster Reading (400 WPM)
-
-Set Words Per Minute to `400` for speed reading.
-
-### Slower, More Comfortable Reading (150 WPM)
-
-Set Words Per Minute to `150` for a more relaxed pace.
-
-### Custom Color Scheme
-
-- Background: `#1a1a1af0` (dark gray)
-- Text: `#e0e0e0` (light gray)
-- Accent: `#4a9eff` (blue)
-
-### Larger Display
-
-Set Scale to `1.5` for a larger, more visible RSVP card.
-
-## 📝 Notes
-
-- The extension works on all websites (`<all_urls>`)
-- Settings are stored locally in your browser
-- The RSVP card is positioned near your cursor but stays within viewport bounds
-- Text extraction respects the page's visual structure and ignores hidden content
-
-## 🔗 Learn More
-
-- [RSVP on Wikipedia](https://en.wikipedia.org/wiki/Rapid_serial_visual_presentation)
-- [WXT Documentation](https://wxt.dev/)
-- [Project Repository](https://github.com/codyadam/read-it-fast)
+- **[Spritz](https://www.spritz.com/)** - Pioneered RSVP reading and ORP concept
+- **[rsvp-reading](https://github.com/thomaskolmans/rsvp-reading)** by [@thomaskolmans](https://github.com/thomaskolmans) - Core RSVP utilities reference implementation
 
 ## 📄 License
 

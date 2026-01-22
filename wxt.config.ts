@@ -11,5 +11,12 @@ export default defineConfig({
   },
   manifest: {
     permissions: ["storage"],
+    browser_specific_settings: {
+      gecko: {
+        data_collection_permissions: {
+          required: ["none"], // This extension does not collect or transmit any data
+        },
+      } as any,
+    },
   },
 });
